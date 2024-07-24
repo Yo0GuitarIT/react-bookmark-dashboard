@@ -1,11 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { BookmarkType } from "../types";
+import { useBookmarks } from "../contexts/BookmarkContext";
 
-interface BookmarkFormProps {
-  onAddBookmark: (bookmark: BookmarkType) => void;
-}
-
-function BookmarkForm({ onAddBookmark }: BookmarkFormProps) {
+function BookmarkForm() {
+  const { addBookmark } = useBookmarks();
   const [formData, setFormData] = useState<BookmarkType>({
     websiteName: "",
     websiteUrl: "",
@@ -21,8 +19,7 @@ function BookmarkForm({ onAddBookmark }: BookmarkFormProps) {
 
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    onAddBookmark(formData);
+    addBookmark(formData);
     setFormData({ websiteName: "", websiteUrl: "" });
   };
 
@@ -31,7 +28,7 @@ function BookmarkForm({ onAddBookmark }: BookmarkFormProps) {
       <h3>Add New Bookmark</h3>
       <form onSubmit={handleOnSubmit}>
         <label>
-          website Name:
+          Website Name:
           <input
             type="text"
             name="websiteName"
@@ -42,7 +39,7 @@ function BookmarkForm({ onAddBookmark }: BookmarkFormProps) {
         </label>
         <br />
         <label>
-          Url:
+          URL:
           <input
             type="url"
             name="websiteUrl"
@@ -52,9 +49,7 @@ function BookmarkForm({ onAddBookmark }: BookmarkFormProps) {
           />
         </label>
         <br />
-        <button type="submit" value="submit">
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );
