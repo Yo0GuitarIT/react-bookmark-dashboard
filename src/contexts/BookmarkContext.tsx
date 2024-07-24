@@ -6,6 +6,7 @@ interface BookmarkContextType {
   bookmarks: BookmarkType[];
   addBookmark: (newBookmark: BookmarkType) => void;
   deleteBookmark: (index: number) => void;
+  updateBookmark: (index: number, updatedBookmark: BookmarkType) => void;
 }
 
 const BookmarkContext = createContext<BookmarkContextType | undefined>(
@@ -27,9 +28,17 @@ export const BookmarkProvider: React.FC<{ children: ReactNode }> = ({
     );
   };
 
+  const updateBookmark = (index: number, updatedBookmark: BookmarkType) => {
+    setBookmarks((prevBookmarks) =>
+      prevBookmarks.map((bookmark, i) =>
+        i === index ? updatedBookmark : bookmark
+      )
+    );
+  };
+
   return (
     <BookmarkContext.Provider
-      value={{ bookmarks, addBookmark, deleteBookmark }}
+      value={{ bookmarks, addBookmark, deleteBookmark, updateBookmark }}
     >
       {children}
     </BookmarkContext.Provider>

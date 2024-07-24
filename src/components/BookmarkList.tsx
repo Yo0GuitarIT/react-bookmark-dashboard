@@ -1,31 +1,25 @@
 import { useBookmarks } from "../contexts/BookmarkContext";
+import BookmarkItem from "./BookImarktem";
 
-function BookmarkList() {
+type isEditModeType = {
+  isEditMode: boolean;
+};
+
+function BookmarkList({ isEditMode }: isEditModeType) {
   const { bookmarks, deleteBookmark } = useBookmarks();
 
   return (
     <>
       <h2>My Bookmark List</h2>
       <div>
-        {bookmarks.map((item, index) => (
-          <div style={{ display: "flex", gap: "1em", marginBottom: "1em" }}>
-            <button key={index}>
-              <a
-                href={item.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {item.websiteName}
-              </a>
-            </button>
-
-            <button
-              style={{ color: "red" }}
-              onClick={() => deleteBookmark(index)}
-            >
-              x
-            </button>
-          </div>
+        {bookmarks.map((bookmark, index) => (
+          <BookmarkItem
+            key={index}
+            bookmark={bookmark}
+            index={index}
+            isEditMode={isEditMode}
+            onDelete={() => deleteBookmark(index)}
+          />
         ))}
       </div>
     </>
