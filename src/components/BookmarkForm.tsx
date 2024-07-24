@@ -28,7 +28,7 @@ function BookmarkForm({ onAddBookmark }: BookmarkFormProps) {
 
   return (
     <>
-      <h3>Add new Url:</h3>
+      <h3>Add New Bookmark</h3>
       <form onSubmit={handleOnSubmit}>
         <label>
           website Name:

@@ -3,7 +3,7 @@ import { BookmarkType } from "../types";
 function BookmarkList({ bookmarks }: { bookmarks: BookmarkType[] }) {
   return (
     <>
-      <h2>Link</h2>
+      <h2>My Bookmark List</h2>
       <div>
         {bookmarks.map((item) => (
           <button key={item.websiteName}>
