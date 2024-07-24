@@ -1,10 +1,6 @@
-type BookmarkType = {
-  websiteName: string;
-  websiteUrl: string;
-};
+import { BookmarkType } from "../types";
 
-
-export const bookmarks: BookmarkType[] = [
+export const initialBookmarks : BookmarkType[] = [
   {
     websiteName: "Facebook",
     websiteUrl: "https://www.facebook.com",
