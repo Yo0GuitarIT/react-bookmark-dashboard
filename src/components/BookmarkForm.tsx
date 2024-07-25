@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { BookmarkType } from "../types";
+import { useBookmarkContext } from "../hooks/useBookmarkContext";
+import { v4 as uuid } from "uuid";
 
-type BookmarkFormProps = {
-  addBookmark: (newBookmark: BookmarkType) => void;
-};
-
-function BookmarkForm({ addBookmark }: BookmarkFormProps) {
-  const [formData, setFormData] = useState<BookmarkType>({
+function BookmarkForm() {
+  const { addBookmark } = useBookmarkContext();
+  const [formData, setFormData] = useState<Omit<BookmarkType, "id">>({
     websiteName: "",
     websiteUrl: "",
   });
@@ -21,7 +20,12 @@ function BookmarkForm({ addBookmark }: BookmarkFormProps) {
 
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    addBookmark(formData);
+
+    const newBookmark: BookmarkType = {
+      ...formData,
+      id: uuid(),
+    };
+    addBookmark(newBookmark);
     setFormData({ websiteName: "", websiteUrl: "" });
   };
 

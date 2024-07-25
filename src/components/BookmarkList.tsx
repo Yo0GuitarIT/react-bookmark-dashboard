@@ -1,30 +1,28 @@
 import BookmarkItem from "./BookImarktem";
 import BookmarkForm from "./BookmarkForm";
-import useBookmarkState from "../hooks/useBookmarkState";
+import { useBookmarkContext } from "../hooks/useBookmarkContext";
 
 type BookmarkListType = {
   isEditMode: boolean;
 };
 
 function BookmarkList({ isEditMode }: BookmarkListType) {
-  const { bookmarks, addBookmark, deleteBookmark, updateBookmark } = useBookmarkState();
-
+  const { bookmarks, updateBookmark } = useBookmarkContext();
   return (
     <>
       <h2>My Bookmark List</h2>
       <div>
-        {bookmarks.map((bookmark, index) => (
+        {bookmarks.map((bookmark) => (
           <BookmarkItem
-            key={index}
+            key={bookmark.id}
             bookmark={bookmark}
             isEditMode={isEditMode}
-            onDelete={() => deleteBookmark(index)}
-            onUpdate={(updatedBookmark) => updateBookmark(index, updatedBookmark)}
+            onUpdate={(updatedBookmark) => updateBookmark(bookmark.id, updatedBookmark)}
           />
         ))}
       </div>
 
-      {isEditMode && <BookmarkForm addBookmark={addBookmark} />}
+      {isEditMode && <BookmarkForm />}
     </>
   );
 }

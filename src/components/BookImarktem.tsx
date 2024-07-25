@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { BookmarkType } from "../types";
+import { useBookmarkContext } from "../hooks/useBookmarkContext";
 
 type BookmarkItemProps = {
   bookmark: BookmarkType;
   isEditMode: boolean;
-  onDelete: () => void;
   onUpdate: (updatedBookmark: BookmarkType) => void;
 };
 
-function BookmarkItem({ bookmark, isEditMode, onDelete, onUpdate }: BookmarkItemProps) {
+function BookmarkItem({ bookmark, isEditMode, onUpdate }: BookmarkItemProps) {
+  const { deleteBookmark } = useBookmarkContext();
+
   const [editedBookmark, setEditedBookmark] = useState(bookmark);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,13 +22,17 @@ function BookmarkItem({ bookmark, isEditMode, onDelete, onUpdate }: BookmarkItem
     onUpdate(editedBookmark);
   };
 
+  const handleDelete = () => {
+    deleteBookmark(bookmark.id);
+  };
+
   if (isEditMode) {
     return (
       <div style={{ display: "flex", gap: "1em", margin: "0.5em" }}>
         <input name="websiteName" value={editedBookmark.websiteName} onChange={handleChange} />
         <input name="websiteUrl" value={editedBookmark.websiteUrl} onChange={handleChange} />
         <button onClick={handleUpdate}>更新</button>
-        <button onClick={onDelete}>刪除</button>
+        <button onClick={handleDelete}>刪除</button>
       </div>
     );
   }
