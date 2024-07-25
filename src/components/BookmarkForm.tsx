@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { BookmarkType } from "../types";
-import { useBookmarks } from "../contexts/BookmarkContext";
 
-function BookmarkForm() {
-  const { addBookmark } = useBookmarks();
+type BookmarkFormProps = {
+  addBookmark: (newBookmark: BookmarkType) => void;
+};
+
+function BookmarkForm({ addBookmark }: BookmarkFormProps) {
   const [formData, setFormData] = useState<BookmarkType>({
     websiteName: "",
     websiteUrl: "",

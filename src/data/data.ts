@@ -1,6 +1,6 @@
 import { BookmarkType } from "../types";
 
-export const initialBookmarks : BookmarkType[] = [
+export const initialBookmark: BookmarkType[] = [
   {
     websiteName: "Facebook",
     websiteUrl: "https://www.facebook.com",

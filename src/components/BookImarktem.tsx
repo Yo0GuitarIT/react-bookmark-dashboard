@@ -1,21 +1,20 @@
-import { useBookmarks } from "../contexts/BookmarkContext";
 import { useState } from "react";
 import { BookmarkType } from "../types";
 
-type BookImarktemProps = {
+type BookmarkItemProps = {
   bookmark: BookmarkType;
-  index: number;
   isEditMode: boolean;
   onDelete: () => void;
+  onUpdate: (updatedBookmark: BookmarkType) => void;
 };
 
 function BookmarkItem({
   bookmark,
-  index,
+  
   isEditMode,
   onDelete,
-}: BookImarktemProps) {
-  const { updateBookmark } = useBookmarks();
+  onUpdate,
+}: BookmarkItemProps) {
   const [editedBookmark, setEditedBookmark] = useState(bookmark);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +23,7 @@ function BookmarkItem({
   };
 
   const handleUpdate = () => {
-    updateBookmark(index, editedBookmark);
+    onUpdate(editedBookmark);
   };
 
   if (isEditMode) {
