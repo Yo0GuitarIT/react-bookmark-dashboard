@@ -30,8 +30,9 @@ function BookmarkForm({ addBookmark }: BookmarkFormProps) {
       <h3>Add New Bookmark</h3>
       <form onSubmit={handleOnSubmit}>
         <label>
-          Website Name:
+          Website Name :
           <input
+            style={{margin:'1em'}}
             type="text"
             name="websiteName"
             value={formData.websiteName}
@@ -41,8 +42,9 @@ function BookmarkForm({ addBookmark }: BookmarkFormProps) {
         </label>
         <br />
         <label>
-          URL:
+          URL :
           <input
+            style={{margin:'1em'}}
             type="url"
             name="websiteUrl"
             value={formData.websiteUrl}

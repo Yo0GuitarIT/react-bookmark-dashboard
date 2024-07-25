@@ -10,7 +10,6 @@ type BookmarkItemProps = {
 
 function BookmarkItem({
   bookmark,
-  
   isEditMode,
   onDelete,
   onUpdate,
