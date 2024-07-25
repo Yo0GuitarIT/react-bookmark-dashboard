@@ -4,12 +4,10 @@ import { useBookmarkContext } from "../hooks/useBookmarkContext";
 
 type BookmarkItemProps = {
   bookmark: BookmarkType;
-  isEditMode: boolean;
-  onUpdate: (updatedBookmark: BookmarkType) => void;
 };
 
-function BookmarkItem({ bookmark, isEditMode, onUpdate }: BookmarkItemProps) {
-  const { deleteBookmark } = useBookmarkContext();
+function BookmarkItem({ bookmark }: BookmarkItemProps) {
+  const { isEditMode, updateBookmark, deleteBookmark } = useBookmarkContext();
 
   const [editedBookmark, setEditedBookmark] = useState(bookmark);
 
@@ -19,7 +17,7 @@ function BookmarkItem({ bookmark, isEditMode, onUpdate }: BookmarkItemProps) {
   };
 
   const handleUpdate = () => {
-    onUpdate(editedBookmark);
+    updateBookmark(bookmark.id, editedBookmark);
   };
 
   const handleDelete = () => {

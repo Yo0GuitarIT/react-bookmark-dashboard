@@ -1,21 +1,16 @@
 import "./styles/App.css";
-import { useState } from "react";
 import BookmarkList from "./components/BookmarkList";
-import BookmarkProvider from "./contexts/BookmarkProvider";
+import { useBookmarkContext } from "./hooks/useBookmarkContext";
 
 function App() {
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
-
-  const handleEditMode = () => {
-    setIsEditMode(!isEditMode);
-  };
+  const { isEditMode, toggleEditMode } = useBookmarkContext();
 
   return (
-    <BookmarkProvider>
+    <>
       <h1 style={{ color: "greenyellow" }}>BookMark DashBoard</h1>
-      <button onClick={handleEditMode}>{isEditMode ? "View" : "Edit"}</button>
-      <BookmarkList isEditMode={isEditMode} />
-    </BookmarkProvider>
+      <button onClick={toggleEditMode}>{isEditMode ? "View" : "Edit"}</button>
+      <BookmarkList />
+    </>
   );
 }
 

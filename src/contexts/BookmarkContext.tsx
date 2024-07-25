@@ -1,15 +1,10 @@
 import { createContext } from "react";
-import { BookmarkType } from "../types";
-
-type BookmarkContextType = {
-  bookmarks: BookmarkType[];
-  addBookmark: (newBookmark: BookmarkType) => void;
-  deleteBookmark: (id: string) => void;
-  updateBookmark: (id: string, updatedBookmark: BookmarkType) => void;
-};
+import { BookmarkContextType } from "../types";
 
 const initialContext: BookmarkContextType = {
   bookmarks: [],
+  isEditMode: false,
+  toggleEditMode: () => {},
   addBookmark: () => {},
   deleteBookmark: () => {},
   updateBookmark: () => {},
