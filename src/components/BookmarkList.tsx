@@ -7,8 +7,7 @@ type BookmarkListType = {
 };
 
 function BookmarkList({ isEditMode }: BookmarkListType) {
-  const { bookmarks, addBookmark, deleteBookmark, updateBookmark } =
-    useBookmarkState();
+  const { bookmarks, addBookmark, deleteBookmark, updateBookmark } = useBookmarkState();
 
   return (
     <>
@@ -20,9 +19,7 @@ function BookmarkList({ isEditMode }: BookmarkListType) {
             bookmark={bookmark}
             isEditMode={isEditMode}
             onDelete={() => deleteBookmark(index)}
-            onUpdate={(updatedBookmark) =>
-              updateBookmark(index, updatedBookmark)
-            }
+            onUpdate={(updatedBookmark) => updateBookmark(index, updatedBookmark)}
           />
         ))}
       </div>

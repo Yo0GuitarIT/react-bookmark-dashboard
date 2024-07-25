@@ -10,16 +10,12 @@ function useBookmarkState() {
   };
 
   const deleteBookmark = (index: number) => {
-    setBookmarks((prevBookmarks) =>
-      prevBookmarks.filter((_, i) => i !== index)
-    );
+    setBookmarks((prevBookmarks) => prevBookmarks.filter((_, i) => i !== index));
   };
 
   const updateBookmark = (index: number, updatedBookmark: BookmarkType) => {
     setBookmarks((prevBookmarks) =>
-      prevBookmarks.map((bookmark, i) =>
-        i === index ? updatedBookmark : bookmark
-      )
+      prevBookmarks.map((bookmark, i) => (i === index ? updatedBookmark : bookmark))
     );
   };
 

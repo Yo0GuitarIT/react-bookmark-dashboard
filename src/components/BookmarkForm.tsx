@@ -32,7 +32,7 @@ function BookmarkForm({ addBookmark }: BookmarkFormProps) {
         <label>
           Website Name :
           <input
-            style={{margin:'1em'}}
+            style={{ margin: "1em" }}
             type="text"
             name="websiteName"
             value={formData.websiteName}
@@ -44,7 +44,7 @@ function BookmarkForm({ addBookmark }: BookmarkFormProps) {
         <label>
           URL :
           <input
-            style={{margin:'1em'}}
+            style={{ margin: "1em" }}
             type="url"
             name="websiteUrl"
             value={formData.websiteUrl}
