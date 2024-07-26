@@ -1,33 +1,31 @@
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { BookmarkType } from "../types";
-import { useBookmarkContext } from "../hooks/useBookmarkContext";
 import { v4 as uuid } from "uuid";
 
-function BookmarkForm() {
-  const { addBookmark } = useBookmarkContext();
+type BookmarkFormProps = {
+  addBookmark: (bookmark: BookmarkType) => void;
+};
+
+function BookmarkForm({ addBookmark }: BookmarkFormProps) {
   const [formData, setFormData] = useState<Omit<BookmarkType, "id">>({
     websiteName: "",
     websiteUrl: "",
   });
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  }, []);
 
-  const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const newBookmark: BookmarkType = {
-      ...formData,
-      id: uuid(),
-    };
-    addBookmark(newBookmark);
-    setFormData({ websiteName: "", websiteUrl: "" });
-  };
+  const handleOnSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const newBookmark: BookmarkType = { ...formData, id: uuid() };
+      addBookmark(newBookmark);
+      setFormData({ websiteName: "", websiteUrl: "" });
+    },
+    [formData, addBookmark]
+  );
 
   return (
     <>
@@ -63,4 +61,4 @@ function BookmarkForm() {
   );
 }
 
-export default BookmarkForm;
+export default memo(BookmarkForm);

@@ -6,8 +6,6 @@ export type BookmarkType = {
 
 export type BookmarkContextType = {
   bookmarks: BookmarkType[];
-  isEditMode: boolean;
-  toggleEditMode: () => void;
   addBookmark: (newBookmark: BookmarkType) => void;
   deleteBookmark: (id: string) => void;
   updateBookmark: (id: string, updatedBookmark: BookmarkType) => void;

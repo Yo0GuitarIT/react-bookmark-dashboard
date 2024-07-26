@@ -1,23 +1,18 @@
 import BookmarkItem from "./BookImarktem";
-import BookmarkForm from "./BookmarkForm";
 import { useBookmarkContext } from "../hooks/useBookmarkContext";
 
-// type BookmarkListType = {
-//   isEditMode: boolean;
-// };
-
-function BookmarkList() {
-  const { bookmarks ,isEditMode } = useBookmarkContext();
+function BookmarkList({ isEditMode }: { isEditMode: boolean }) {
+  const { bookmarks } = useBookmarkContext();
   return (
     <>
       <h2>My Bookmark List</h2>
       <div>
         {bookmarks.map((bookmark) => (
-          <BookmarkItem key={bookmark.id} bookmark={bookmark}/>
+          <BookmarkItem key={bookmark.id} bookmark={bookmark} isEditMode={isEditMode} />
         ))}
       </div>
 
-      {isEditMode && <BookmarkForm />}
+    
     </>
   );
 }

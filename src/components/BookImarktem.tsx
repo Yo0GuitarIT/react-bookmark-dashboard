@@ -1,28 +1,32 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BookmarkType } from "../types";
 import { useBookmarkContext } from "../hooks/useBookmarkContext";
 
 type BookmarkItemProps = {
   bookmark: BookmarkType;
+  isEditMode: boolean;
 };
 
-function BookmarkItem({ bookmark }: BookmarkItemProps) {
-  const { isEditMode, updateBookmark, deleteBookmark } = useBookmarkContext();
-
+function BookmarkItem({ bookmark,isEditMode }: BookmarkItemProps) {
+  const {  updateBookmark, deleteBookmark } = useBookmarkContext();
   const [editedBookmark, setEditedBookmark] = useState(bookmark);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    setEditedBookmark(bookmark);
+  }, [bookmark]);
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setEditedBookmark((prev) => ({ ...prev, [name]: value }));
-  };
+  }, []);
 
-  const handleUpdate = () => {
+  const handleUpdate = useCallback(() => {
     updateBookmark(bookmark.id, editedBookmark);
-  };
+  }, [updateBookmark, bookmark.id, editedBookmark]);
 
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
     deleteBookmark(bookmark.id);
-  };
+  }, [deleteBookmark, bookmark.id]);
 
   if (isEditMode) {
     return (
