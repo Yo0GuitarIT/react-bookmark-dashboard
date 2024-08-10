@@ -1,4 +1,3 @@
-import "./styles/App.css";
 import BookmarkList from "./components/BookmarkList";
 import { useState } from "react";
 import BookmarkForm from "./components/BookmarkForm";
@@ -14,8 +13,10 @@ function App() {
 
   return (
     <>
-      <h1 style={{ color: "greenyellow" }}>BookMark DashBoard</h1>
-      <button onClick={toggleEditMode}>{isEditMode ? "View" : "Edit"}</button>
+      <h1 style={{ color: " var(--ts-primary-400)" }}>BookMark DashBoard</h1>
+      <button className={"ts-button is-secondary"} onClick={toggleEditMode}>
+        {isEditMode ? "View" : "Edit"}
+      </button>
       <BookmarkList isEditMode={isEditMode} />
       {isEditMode && <BookmarkForm addBookmark={addBookmark} />}
     </>

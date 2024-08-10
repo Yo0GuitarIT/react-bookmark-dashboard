@@ -7,8 +7,8 @@ type BookmarkItemProps = {
   isEditMode: boolean;
 };
 
-function BookmarkItem({ bookmark,isEditMode }: BookmarkItemProps) {
-  const {  updateBookmark, deleteBookmark } = useBookmarkContext();
+function BookmarkItem({ bookmark, isEditMode }: BookmarkItemProps) {
+  const { updateBookmark, deleteBookmark } = useBookmarkContext();
   const [editedBookmark, setEditedBookmark] = useState(bookmark);
 
   useEffect(() => {
@@ -31,10 +31,25 @@ function BookmarkItem({ bookmark,isEditMode }: BookmarkItemProps) {
   if (isEditMode) {
     return (
       <div style={{ display: "flex", gap: "1em", margin: "0.5em" }}>
-        <input name="websiteName" value={editedBookmark.websiteName} onChange={handleChange} />
-        <input name="websiteUrl" value={editedBookmark.websiteUrl} onChange={handleChange} />
-        <button onClick={handleUpdate}>更新</button>
-        <button onClick={handleDelete}>刪除</button>
+        <input
+          name="websiteName"
+          value={editedBookmark.websiteName}
+          onChange={handleChange}
+        />
+        <input
+          name="websiteUrl"
+          value={editedBookmark.websiteUrl}
+          onChange={handleChange}
+        />
+        <button className={"ts-button"} onClick={handleUpdate}>
+          更新
+        </button>
+        <button
+          className={"ts-button is-start-icon is-negative is-outline"}
+          onClick={handleDelete}
+        >
+          <span className={"ts-icon is-trash-icon"}></span> 刪除
+        </button>
       </div>
     );
   }

@@ -12,10 +12,13 @@ function BookmarkForm({ addBookmark }: BookmarkFormProps) {
     websiteUrl: "",
   });
 
-  const handleOnChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  }, []);
+  const handleOnChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target;
+      setFormData((prevData) => ({ ...prevData, [name]: value }));
+    },
+    []
+  );
 
   const handleOnSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
@@ -28,7 +31,7 @@ function BookmarkForm({ addBookmark }: BookmarkFormProps) {
   );
 
   return (
-    <>
+    <div className={"ts-container"}>
       <h3>Add New Bookmark</h3>
       <form onSubmit={handleOnSubmit}>
         <label>
@@ -55,9 +58,11 @@ function BookmarkForm({ addBookmark }: BookmarkFormProps) {
           />
         </label>
         <br />
-        <button type="submit">Submit</button>
+        <button className={"ts-button"} type="submit">
+          Submit
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 
